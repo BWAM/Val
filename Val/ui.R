@@ -1,47 +1,42 @@
+#
+# This is the user-interface definition of a Shiny web application. You can
+# run the application by clicking 'Run App' above.
+#
+# Find out more about building applications with Shiny here:
+#
+#    http://shiny.rstudio.com/
+#
 
-dashboardPage(
-    # skin = "black",
-    dashboardHeader(title = "Val"), # End dashboardHeader
-    dashboardSidebar(
-        menuItem("Load Data", tabName = "load", icon = icon("arrow-circle-up"),
-                 selected = TRUE),
-        menuItem("Report", tabName = "report", icon = icon("newspaper")),
-        menuItem("Download", tabName = "download", icon = icon("arrow-circle-down")),
-        menuItem("About", tabName = "about", icon = icon("info-circle"))
-    ), # End dashboardSidebar
-    dashboardBody(
-        tabItems(
-            # First tab content
-            tabItem(tabName = "load",
-                    h1("Load Data"),
-                    h2('Welcome to the data validation dashboard, Val.'),
-                    h3('Please begin by uploading your data in the "Load Data" tab.'),
-                    fluidRow(
-                        box(title = "Select the Type of File(s) to be Uploaded",
-                            selectInput("type", "Type:",
-                                        c("ALS" = "als")),
-                            fileInput("als_import", "Choose Zip File",
-                                      accept = "zip"),
-                            width = 6),
+library(shiny)
+library(shinythemes)
 
-                        box(title = "Controls",
-                            sliderInput("slider", "Number of observations:", 1, 100, 50),
-                            width = 6
-                        )
-                    )
-            ), # End tabItem load
+# Define UI for application that draws a histogram
+shinyUI(
+    navbarPage(
+        title = "Val",
+        theme = shinytheme("flatly"),
+        tabPanel("Table",
+            fileInput(
+                inputId = "files",
+                label = "Select all files of intrest.",
+                multiple = TRUE,
+                accept = c(".zip"),
+                placeholder = "No file selected"),
+            # textOutput("text_test"),
+            br(),
+            downloadButton("download", "Render Report"),
+            br(),
+            br(),
+            # textOutput("test"),
+            br(),
+            shiny::tableOutput("zip_info")
 
-            tabItem(tabName = "report",
-                    h2("Report")
-            ), # End tabItem report
-
-            tabItem(tabName = "download",
-                    h2("Download")
-            ), # End tabItem download
-
-            tabItem(tabName = "about",
-                    h2("About")
-            ) # End tabItem about
-        ) # End tabItems
-    ) # End dashboardBody
-) # End dashboardPage
+            # tableOutput("contents")
+        ),
+        tabPanel("App Instructions",
+                 tags$iframe(src = 'intro.html', # put in /www
+                             width = '60%', height = '800px',
+                             frameborder = 0, scrolling = 'auto')
+                 )
+    ) # navbar
+) #ShinyUI

@@ -1,0 +1,27 @@
+---
+title: "Telecommuting Journal Logs"
+date: "`r format(Sys.Date(),format='%B %d, %Y')`"
+output: 
+  word_document:
+    reference_docx: word_style.docx
+params:
+  journals:  !r data(mtcars); mtcars
+---
+
+```{r setup, echo=FALSE, message=FALSE, warning=FALSE}
+knitr::opts_chunk$set(echo = FALSE,
+                      message = FALSE,
+                      warning = FALSE,
+                      results = "asis")
+```
+
+```{r}
+library(tidyverse)
+```
+
+```{r}
+params$journals %>% 
+  dplyr::select(1:8) %>%
+  knitr::kable()
+```
+

@@ -1,0 +1,15 @@
+---
+title: "Overview"
+output: 
+  html_document:
+    css: css_styles.css
+---
+
+This application allows you to upload data to check it against New York State Department of Environmental Conservation's Division of Water data standards. A report is generated to identify if 
+
+To load data, click on the "Browse" button, navigate to the location of the data on your machine, select all of the files of interest, and click "Open." The selected files will be compiled and made available in an interactive table below.
+
+- How to select multiple files
+    + Select a range of files by click on the top most file of interest, hold shift, and select the lowest file of interest. All files in between the two selected files should be highlighted. Once all files of interest have been selected, click "Open."
+    + Select specific files by holding control as you select multiple files. Once all files of interest have been selected, click "Open."
+
